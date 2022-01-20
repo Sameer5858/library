@@ -1,4 +1,5 @@
 let myLibrary = [];
+//book constructor
 function Book(title, author, pages, isRead) {
   this.title = title;
   this.author = author;
@@ -8,13 +9,14 @@ function Book(title, author, pages, isRead) {
     return title + " by " + author + ", " + pages + "pages" + ", " + read;
   };
 }
-
+// creates book from book constructor and adds to library
 function addBookToLibrary(title, author, pages, isRead) {
   const book = new Book(title, author, pages, isRead);
   myLibrary.push(book);
+  displayBook();
 }
-
-const card = document.getElementById("cards-container");
+const container = document.getElementById("container");
+// creates card to insert in container
 function createCards(book) {
   const cardDiv = document.createElement("div");
   cardDiv.className = "card";
@@ -26,7 +28,7 @@ function createCards(book) {
   pages.className = "pages";
   const read = document.createElement("div");
   read.className = "read";
-  card.append(cardDiv);
+  container.append(cardDiv);
   cardDiv.append(title);
   cardDiv.append(author);
   cardDiv.append(pages);
@@ -36,27 +38,23 @@ function createCards(book) {
   pages.textContent = book.pages;
   read.textContent = book.isRead;
 }
+// function to display books from library
 function displayBook() {
-  card.innerHTML = "";
+  container.innerHTML = "";
   myLibrary.forEach((book) => {
     createCards(book);
   });
 }
-const submit = document.getElementById("submit");
-submit.addEventListener("click", () => {
-  const titleInput = document.getElementById("title");
-  let title = titleInput.value;
-  const authorInput = document.getElementById("author");
-  let author = authorInput.value;
-  const pagesInput = document.getElementById("pages");
-  let pages = pagesInput.value;
-  let checkbox = document.getElementById("isRead");
-  let isRead;
-  if (checkbox.checked) {
-    isRead = "read";
-  } else {
-    isRead = "not read";
-  }
-  addBookToLibrary(title, author, pages, isRead);
-  displayBook();
+const modal = document.querySelector(".modal");
+const overlay = document.querySelector("#overlay");
+const addBookButton = document.getElementById("addbook");
+// event listener for add book button
+addBookButton.addEventListener("click", () => {
+  modal.classList.add("active");
+  overlay.classList.add("active");
+});
+overlay.addEventListener("click", () => {
+  modal.classList.remove("active");
+  modal.classList.remove("active");
+  overlay.classList.remove("active");
 });
