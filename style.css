@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+/* global styles */
 *::before,
 *::after {
   box-sizing: border-box;
@@ -6,11 +8,39 @@
 }
 body {
   height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto Condensed", sans-serif;
+}
+button:hover {
+  -webkit-filter: brightness(70%);
+}
+/* header styles */
+.header {
+  font-size: 6rem;
+  text-align: center;
+  padding: 1%;
+  background-color: rgb(161, 196, 231);
+  border-bottom: solid black 2px;
+}
+/* addbook button styles */
+.addbook {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+button#addbook {
+  height: 100px;
+  width: 200px;
+  font-size: 2.3rem;
+  font-weight: bold;
+  margin: 10px;
+  background-color: springgreen;
+  border-radius: 25px;
+  font-family: "Roboto Condensed", sans-serif;
 }
 
-.card {
-  background-color: lightblue;
-}
+/* modal styles */
 .modal {
   position: fixed;
   top: 50%;
@@ -19,26 +49,63 @@ body {
   transition: 200ms ease-in-out;
   border: 1px solid black;
   z-index: 10;
-  background-color: white;
-  width: 300px;
+  background-color: lightblue;
+  width: 400px;
+  height: 600px;
+  max-height: 80%;
   max-width: 80%;
+  border-radius: 10px;
 }
 .modal.active {
   transform: translate(-50%, -50%) scale(1);
 }
+.modal-header {
+  text-align: center;
+  padding: 10px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 20px;
+  text-decoration: underline;
+}
+/* form styles */
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 25px;
   padding-bottom: 10px;
+  font-size: 2rem;
 }
-.modal-header {
+input[type="text"],
+input[type="number"] {
+  height: 60px;
+  width: 300px;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 5px;
   text-align: center;
-  padding: 10px;
+  background-color: whitesmoke;
 }
-
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+input#submit {
+  height: 80px;
+  width: 120px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  background-color: rgb(171, 247, 156);
+  text-align: center;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-family: "Roboto Condensed", sans-serif;
+}
+input#submit:hover {
+  -webkit-filter: brightness(70%);
+}
+/* overlay styles */
 #overlay {
   position: fixed;
   transition: 200ms ease-in-out;
@@ -53,4 +120,47 @@ form {
 #overlay.active {
   opacity: 1;
   pointer-events: all;
+}
+#cards-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  min-width: 300px;
+  min-height: 300px;
+  border-radius: 10px;
+  font-size: 2rem;
+  font-weight: 100;
+  flex: 0 1 auto;
+  background-color: rgb(161, 196, 231);
+  padding: 20px;
+  border: 2px solid black;
+}
+.card button {
+  font-size: 2rem;
+  height: 3rem;
+  width: 60%;
+  border-radius: 10px;
+  margin-top: auto;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 500;
+}
+.read {
+  background-color: lightgreen;
+}
+.not-read {
+  background-color: #ffe8e8;
+}
+.remove {
+  background-color: rgb(255, 65, 65);
+  margin-top: auto;
+  margin-bottom: auto;
 }

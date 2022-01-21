@@ -1,4 +1,4 @@
-const container = document.getElementById("container");
+const container = document.getElementById("cards-container");
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector("#overlay");
 const addBookButton = document.getElementById("addbook");
@@ -40,22 +40,28 @@ function createCards(book) {
   author.className = "author";
   const pages = document.createElement("div");
   pages.className = "pages";
-  const isRead = document.createElement("button");
-  isRead.className = "isRead";
+  const isReadButton = document.createElement("button");
+  isReadButton.className = "isReadButton";
   const removeButton = document.createElement("button");
   removeButton.className = "remove";
+  if (book.isRead === "Read") {
+    isReadButton.classList.add("read");
+  } else if (book.isRead === "Not read") {
+    isReadButton.classList.add("not-read");
+  }
   removeButton.textContent = "Remove";
   container.append(cardDiv);
   cardDiv.append(title);
   cardDiv.append(author);
   cardDiv.append(pages);
-  cardDiv.append(isRead);
+  cardDiv.append(isReadButton);
   cardDiv.append(removeButton);
   removeButton.value = book.id;
-  title.textContent = book.title;
-  author.textContent = book.author;
-  pages.textContent = book.pages;
-  isRead.textContent = book.isRead;
+  isReadButton.value = book.id;
+  title.textContent = `Title: ${book.title}`;
+  author.textContent = `Author: ${book.author}`;
+  pages.textContent = `Pages: ${book.pages}`;
+  isReadButton.textContent = book.isRead;
 }
 // function to display books from library
 function displayBook() {
@@ -96,11 +102,27 @@ submitButton.addEventListener("click", () => {
     removeModalClass();
   }
 });
-// event listener for click and matches with remove class then takes out the id from the element button and remove it from the library and re displays
+// event listener for click
 window.addEventListener("click", (e) => {
+  //if clicked on remove button matches the id from the element button to book.id and remove it from the library and re displays
   if (e.target.classList[0] === "remove") {
     const idToDelete = e.target.value;
     myLibrary = myLibrary.filter((book) => book.id !== idToDelete);
     displayBook();
+  }
+  // if clicked read button changes the status
+  else if (e.target.classList[0] === "isReadButton") {
+    const idToChangeStatus = e.target.value;
+    myLibrary.forEach((book) => {
+      if (book.id === idToChangeStatus) {
+        if (book.isRead === "Not read") {
+          book.isRead = "Read";
+          displayBook();
+        } else if (book.isRead === "Read") {
+          book.isRead = "Not read";
+          displayBook();
+        }
+      }
+    });
   }
 });
