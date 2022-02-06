@@ -14,15 +14,39 @@ function uuid() {
     ).toString(16)
   );
 }
-function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
-  this.id = uuid();
-  this.info = function () {
-    return title + " by " + author + ", " + pages + "pages" + ", " + read;
-  };
+// book constructor
+// function Book(title, author, pages, isRead) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.isRead = isRead;
+//   this.id = uuid();
+//   this.info = function () {
+//     return title + " by " + author + ", " + pages + "pages" + ", " + read;
+//   };
+// }
+
+// Book class constructor
+class Book {
+  constructor(title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+    this.id = uuid();
+  }
+  get info() {
+    return (
+      this.title +
+      " by " +
+      this.author +
+      ", " +
+      this.pages +
+      "pages" +
+      ", " +
+      this.read
+    );
+  }
 }
 // creates book from book constructor and adds to library
 function addBookToLibrary(title, author, pages, isRead) {
